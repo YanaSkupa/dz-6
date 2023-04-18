@@ -3,55 +3,30 @@ import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
-        String[] words = {"мама", "тато", "їж їжак желе", "спасібі", "кожен", "інший", "майже"};
-        char[] uniqueChars = findChars(words);
-        System.out.println(uniqueChars);
+        int[] numbers = {8, 2, 3, 4, 5, 6, 7};
+        System.out.println(sumOfEvenNumbers(numbers));
+
+        String str = "Alexx9800";
+        printUniqueCharacters(str);
     }
 
-    public static boolean hasEvenOccurrences(String s) {
-        Set<Character> set = new HashSet<>();
-        for (char c : s.toCharArray()) {
-            if (Character.isLetter(c)) {
-                if (set.contains(c)) {
-                    set.remove(c);
-                } else {
-                    set.add(c);
-                }
+    public static int sumOfEvenNumbers(int[] numbers) {
+        int sum = 0;
+        for (int number : numbers) {
+            if (number % 2 == 0) {
+                sum += number;
             }
         }
-        return set.isEmpty();
+        return sum;
     }
 
-    public static char[] findChars(String[] words) {
-        for (int i = 0; i < words.length - 1; i++) {
-            for (int j = i + 1; j < words.length; j++) {
-                if (hasEvenOccurrences(words[i]) && hasEvenOccurrences(words[j])) {
-                    char[] chars1 = words[i].toCharArray();
-                    char[] chars2 = words[j].toCharArray();
-                    Set<Character> set1 = new HashSet<>();
-                    Set<Character> set2 = new HashSet<>();
-                    for (char c : chars1) {
-                        set1.add(c);
-                    }
-                    for (char c : chars2) {
-                        set2.add(c);
-                    }
-                    Set<Character> uniqueSet = new HashSet<>(set1);
-                    uniqueSet.addAll(set2);
-                    for (char c : set1) {
-                        if (set2.contains(c)) {
-                            uniqueSet.remove(c);
-                        }
-                    }
-                    char[] uniqueChars = new char[uniqueSet.size()];
-                    int k = 0;
-                    for (char c : uniqueSet) {
-                        uniqueChars[k++] = c;
-                    }
-                    return uniqueChars;
-                }
-            }
+    public static void printUniqueCharacters(String str) {
+        Set<Character> uniqueCharacters = new HashSet<>();
+        for (char character : str.toCharArray()) {
+            uniqueCharacters.add(character);
         }
-        return new char[0];
+        for (char character : uniqueCharacters) {
+            System.out.println(character);
+        }
     }
 }
